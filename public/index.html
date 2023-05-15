@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image to Text</title>
+    <style>
+        #result {
+            white-space: pre-wrap; /* Preserve line breaks */
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="image" required>
+    <button type="submit">Upload</button>
+</form>
+
+<pre id="result"></pre>
+
+<script>
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch(this.action, {
+            method: this.method,
+            body: formData,
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').textContent = data.text;
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    });
+</script>
+</body>
+</html>
