@@ -4,7 +4,6 @@
     <title>Image to Text</title>
     <link rel="stylesheet" href="stylesheets/style.css">
 </head>
-
 <body>
 
 <div class="header">
@@ -16,7 +15,7 @@
     </div>
 </div>
 
-<p>Click on the "Choose File" button to upload a file:</p>
+
 <form action="http://localhost:3000/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="image" required>
     <button type="submit" id="upload-button">Text Parser</button>
@@ -28,6 +27,8 @@
 </div>
 
 <pre id="result"></pre>
+<button id="copy-button" style="display:none;">Copy to clipboard</button>
+<input type="button" value="Reload Page" onClick="window.location.reload(true)">
 
 <script>
     document.querySelector('form').addEventListener('submit', function (event) {
@@ -36,6 +37,7 @@
         const formData = new FormData(this);
         const spinner = document.querySelector('.spinner');
         const uploadButton = document.getElementById('upload-button');
+        const copyButton = document.getElementById('copy-button');
 
         spinner.style.display = 'block';
         uploadButton.disabled = true;
@@ -49,12 +51,22 @@
                 spinner.style.display = 'none';
                 uploadButton.disabled = false;
                 document.getElementById('result').textContent = data.text;
+                copyButton.style.display = 'block';
             })
             .catch(err => {
                 spinner.style.display = 'none';
                 uploadButton.disabled = false;
                 console.error(err);
             });
+    });
+
+    document.getElementById('copy-button').addEventListener('click', function() {
+        const text = document.getElementById('result').textContent;
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                this.textContent = 'Copied!';
+            })
+            .catch(err => console.error('Could not copy text: ', err));
     });
 </script>
 </body>
