@@ -2,8 +2,14 @@
 
 # Installation
 ```shellscript
-npm install express multer cors
-npm install --save text-from-image
+1. https://github.com/hieund12/imge2text.git
+cd to imge2text folder
+2. npm install express multer cors
+3. npm install --save text-from-image
+4. RUN APP
+
+node app.js
+
 ```
 
 REFER: https://www.npmjs.com/package/text-from-image
