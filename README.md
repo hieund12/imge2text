@@ -1,4 +1,6 @@
 # imge2text
+Demo:
+![Alt text](https://github.com/hieund12/imge2text/blob/main/Screen%20Shot%202023-05-15%20at%2016.07.28.png) "How to use imge2text")
 
 # Installation
 ```shellscript
