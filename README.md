@@ -7,20 +7,23 @@ Demo:
 1. https://github.com/hieund12/imge2text.git
 cd to imge2text folder
 2. npm install express multer cors
-3. npm install --save text-from-image
+3. npm install --save tesseract
 4. RUN APP
 
 node app.js
 
 ```
 
-REFER: https://www.npmjs.com/package/text-from-image
+REFER: https://www.npmjs.com/package/tesseract
 ```javascript
-const ReadText = require('text-from-image')
+const Tesseract = require('tesseract.js');
 
-ReadText('./image.png').then(text => {
+Tesseract.recognize(
+    'img/image.jpg',
+    'jpn',
+    { logger: m => console.log(m) }
+).then(({ data: { text } }) => {
     console.log(text);
-}).catch(err => {
-    console.log(err);
 })
+
 ```
